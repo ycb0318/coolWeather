@@ -10,7 +10,7 @@ public class County extends DataSupport {
     private int id;
     private String countyName;
     private int parentCityID;
-    private int countyWeatherID;
+    private String countyWeatherID;
 
     public int getId() {
         return id;
@@ -36,11 +36,11 @@ public class County extends DataSupport {
         this.parentCityID = parentCityID;
     }
 
-    public int getCountyWeatherID() {
+    public String getCountyWeatherID() {
         return countyWeatherID;
     }
 
-    public void setCountyWeatherID(int countyWeatherID) {
+    public void setCountyWeatherID(String countyWeatherID) {
         this.countyWeatherID = countyWeatherID;
     }
 }
