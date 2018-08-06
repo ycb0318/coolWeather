@@ -1,6 +1,7 @@
 package com.example.derrick.coolweather.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.derrick.coolweather.R;
+import com.example.derrick.coolweather.WeatherActivity;
 import com.example.derrick.coolweather.db.City;
 import com.example.derrick.coolweather.db.County;
 import com.example.derrick.coolweather.db.Province;
+import com.example.derrick.coolweather.gson.Weather;
 import com.example.derrick.coolweather.util.HttpUitl;
 import com.example.derrick.coolweather.util.Utility;
 
@@ -88,6 +91,11 @@ public class ChooseAreaFragment extends Fragment {
                 }else if(currentLevel == LEVEL_CITY){
                     selectCity = cityList.get(i);
                     queryCounty();
+                }else if(currentLevel == LEVEL_COUNTY){
+                    String weatherID = countyList.get(i).getCountyWeatherID();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weatherID",weatherID);
+                    startActivity(intent);
                 }
             }
         });
@@ -182,7 +190,7 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                boolean result = false;
+                Boolean result = false;
                 if("province".equals(type)){
                     result = Utility.handleProvinceResponse(responseText);
                 }else if("city".equals(type)){

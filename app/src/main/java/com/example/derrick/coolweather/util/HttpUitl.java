@@ -1,5 +1,7 @@
 package com.example.derrick.coolweather.util;
 
+import com.google.gson.annotations.SerializedName;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
