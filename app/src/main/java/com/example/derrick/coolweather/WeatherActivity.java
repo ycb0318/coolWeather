@@ -55,17 +55,23 @@ public class WeatherActivity extends AppCompatActivity {
         pmQuality = (TextView) findViewById(R.id.pm2_5_quality);
         bingPic = (ImageView) findViewById(R.id.bing_pic);
 
-        String weatherID = getIntent().getStringExtra("weatherID");
-        requestWeather(weatherID);
-//
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        String weatherString = prefs.getString("weather",null);
-//        if(weatherString != null){
-//            Weather weather = Utility.handleWeatherResponse(weatherString);
-//            showWeatherInfo(weather);
-//        }else{
-//
-//        }
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String weatherString = prefs.getString("weather",null);
+        if(weatherString != null){
+            String weatherID = getIntent().getStringExtra("weatherID");
+            Weather weather = Utility.handleWeatherResponse(weatherString);
+            if(weatherID.equals(weather.basic.cityWeatherID)){
+                showWeatherInfo(weather);
+            }else{
+                requestWeather(weatherID);
+            }
+
+        }else{
+            String weatherID = getIntent().getStringExtra("weatherID");
+            requestWeather(weatherID);
+        }
 
 
     }
